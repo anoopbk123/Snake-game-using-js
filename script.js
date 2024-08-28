@@ -1,5 +1,7 @@
 //HTML elements
 const board = document.getElementById("game-board");
+const instructionText = document.getElementById('instruction-text');
+const logo = document.getElementById('logo');
 
 //Variables
 const gridSize = 20;
@@ -7,7 +9,7 @@ let snake = [{ x: 10, y: 10 }];
 let food = generateFood();
 let direction = 'right'
 let gameInterval;
-let gameSpeedDelay;
+let gameSpeedDelay = 300;
 let gameStarted = false;
 
 //Draw game
@@ -73,9 +75,11 @@ function moveSnake(){
   snake.unshift(head)
   if(head.x === food.x && head.y === food.y){
     food = generateFood();
-    clearInterval();
+    increaseSpeed();
+    clearInterval(gameInterval);
     gameInterval = setInterval(()=>{
       moveSnake()
+    //checkCollision();
       draw()
     }, gameSpeedDelay)
   }
@@ -86,6 +90,13 @@ function moveSnake(){
 
 function startGame(){
   gameStarted = true;
+  instructionText.style.display = 'none';
+  logo.style.display = 'none';
+  gameInterval = setInterval(()=>{
+    moveSnake()
+    //checkCollision();
+    draw();
+  }, gameSpeedDelay);
 }
 
 // setInterval(()=>{
@@ -93,7 +104,36 @@ function startGame(){
 //   draw()
 // },200)
 
+//Key press actions
+function handleKeyPress(event){
+  if((!gameStarted && event.code === 'Space') || (!gameStarted && event.key === ' ') ){
+    startGame();
+  }else{
+    switch (event.key){
+      case 'ArrowUp':
+        direction = 'up';
+        break;
+      case 'ArrowDown':
+        direction = 'down';
+        break;
+      case 'ArrowRight':
+        direction = 'right';
+        break;
+      case 'ArrowLeft':
+        direction = 'left';
+        break;
+    }
+  }
+}
+
+document.addEventListener('keydown', handleKeyPress);
+
+function increaseSpeed(){
+  gameSpeedDelay -= 5;
+}
+
 //Button actions for touch control
 function handleButtonPress(e){
   direction = e.target.innerHTML
 }
+
