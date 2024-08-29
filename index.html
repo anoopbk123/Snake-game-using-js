@@ -14,24 +14,31 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <div>
-      <div class="scores">
-        <h1 id="score">000</h1>
-        <h1 id="highScore">000</h1>
-      </div>
-      <div class="game-border-1">
-        <div class="game-border-2">
-          <div class="game-border-3">
-            <div id="game-board"></div>
+    <div class="game-display">
+      <div>
+        <div class="scores">
+          <h1 id="score">000</h1>
+          <h1 id="highScore">000</h1>
+        </div>
+        <div class="game-border-1">
+          <div class="game-border-2">
+            <div class="game-border-3">
+              <div id="game-board"></div>
+            </div>
           </div>
         </div>
       </div>
+      <div id="instruction-text">
+        <h1>Press spacebar to start the game</h1>
+        <h2><button id="start-button" onclick="startGame()">start</button></h2>
+      </div>
+      <img id="logo" src="snake-game-ai-gen.png" alt="snake-logo" />
     </div>
-    <h1 id="instruction-text">Press spacebar to start the game</h1>
-    <img id="logo" src="snake-game-ai-gen.png" alt="snake-logo" />
-    <button onclick="handleButtonPress(event)">up</button>
-    <button onclick="handleButtonPress(event)">left</button>
-    <button onclick="handleButtonPress(event)">right</button>
-    <button onclick="handleButtonPress(event)">down</button>
+    <div class="controller-container">
+      <button onclick="handleButtonPress(event)">up</button><br>
+      <button onclick="handleButtonPress(event)">left</button>
+      <button onclick="handleButtonPress(event)">right</button><br>
+      <button onclick="handleButtonPress(event)">down</button>
+    </div>
   </body>
 </html>
